@@ -7,7 +7,7 @@ function P.dibujarMenu()
     local w = love.graphics.getWidth()
     local font = love.graphics.getFont()
     local t1 = "Peque Symphonie"
-    local t2 = "ESC para salir | M: Menu"
+    local t2 = "ESC: Salir | M: Menu | U: Ultra"
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 200, 0, 2, 2)
     love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 250, 0, 1.2, 1.2)
 
@@ -40,7 +40,7 @@ function P.dibujarTextos()
     local w = love.graphics.getWidth()
     local font = love.graphics.getFont()
     local t1 = "Peque Symphonie"
-    local t2 = "ESC para salir | M: Menu"
+    local t2 = "ESC: Salir | M: Menu | U: Ultra"
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 30, 0, 2, 2)
     love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 70, 0, 1.2, 1.2)
 end

@@ -39,6 +39,11 @@ function M.reiniciar()
     M.notaEnCurso = 1
 end
 
+-- REINICIAR SECUENCIA DEL NIVEL ACTUAL
+function M.reiniciarSecuencia()
+    M.notaEnCurso = 1
+end
+
 -- RENDERIZADO
 function M.dibujar()
     local secuencia = M.secuencias[M.nivelActual]

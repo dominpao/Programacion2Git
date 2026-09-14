@@ -10,10 +10,11 @@ function State:new(name)
     local self = setmetatable({}, State)
     self.name = name
     return self
-end
+    end
 
--- ENTRAR AL ESTADO (se ejecuta al cambiar a este estado)
 function State:enter()
+
+-- ENTRAR AL ESTADO (se ejecuta al cambiar a este esta
 end
 
 -- ACTUALIZAR ESTADO (se ejecuta cada frame)

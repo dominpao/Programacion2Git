@@ -69,6 +69,11 @@ function love.keypressed(key)
             sm:changeState("menu")
         end
     end
+    if key == "u" then
+        if sm:getState() == "game" then
+            GameState:toggleUltra()
+        end
+    end
 end
 
 -- RENDERIZADO
