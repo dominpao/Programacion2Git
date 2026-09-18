@@ -20,7 +20,8 @@ local esfera = {
     angulo = 0,
     velocidadAngular = 3,
     color = {1, 0, 0},
-    activa = false
+    activa = false,
+    timerColor = 0
 }
 
 function GameState:setMachine(sm)
@@ -47,6 +48,11 @@ function GameState:update(dt)
         esfera.angulo = esfera.angulo + esfera.velocidadAngular * dt
         esfera.x = cx + 150 * math.cos(esfera.angulo)
         esfera.y = cy + 150 * math.sin(esfera.angulo)
+        esfera.timerColor = esfera.timerColor - dt
+        if esfera.timerColor <= 0 then
+            esfera.color = {math.random(), math.random(), math.random()}
+            esfera.timerColor = 0.5
+        end
     end
 
     if estadoJuego == "lanzada" then
@@ -138,6 +144,8 @@ function GameState:toggleUltra()
     esfera.activa = not esfera.activa
     if esfera.activa then
         esfera.angulo = 0
+        esfera.timerColor = 0
+        esfera.color = {math.random(), math.random(), math.random()}
         esfera.x = cx + 150 * math.cos(esfera.angulo)
         esfera.y = cy + 150 * math.sin(esfera.angulo)
     end
