@@ -21,7 +21,12 @@ local esfera = {
     velocidadAngular = 3,
     color = {1, 0, 0},
     activa = false,
-    timerColor = 0
+    timerColor = 0,
+    ultraOn = false,
+    timerSpawn = 0,
+    duracionVisible = 4,
+    duracionOculta = 1,
+    visible = false
 }
 
 function GameState:setMachine(sm)
@@ -36,22 +41,39 @@ function GameState:enter()
     notaColor = {1, 1, 1}
     mx = cx
     my = cy
-    esfera.activa = false
+    esfera.ultraOn = false
+    esfera.visible = false
 end
 
 -- ACTUALIZAR ESTADO
 function GameState:update(dt)
     mx, my = love.mouse.getPosition()
 
-    -- Actualizar esfera giratoria
-    if esfera.activa then
-        esfera.angulo = esfera.angulo + esfera.velocidadAngular * dt
-        esfera.x = cx + 150 * math.cos(esfera.angulo)
-        esfera.y = cy + 150 * math.sin(esfera.angulo)
-        esfera.timerColor = esfera.timerColor - dt
-        if esfera.timerColor <= 0 then
-            esfera.color = {math.random(), math.random(), math.random()}
-            esfera.timerColor = 0.5
+    -- Actualizar esfera giratoria (spawner)
+    if esfera.ultraOn then
+        esfera.timerSpawn = esfera.timerSpawn - dt
+        if esfera.timerSpawn <= 0 then
+            esfera.visible = not esfera.visible
+            if esfera.visible then
+                esfera.timerSpawn = esfera.duracionVisible
+                esfera.color = {math.random(), math.random(), math.random()}
+                esfera.angulo = math.random() * 2 * math.pi
+                esfera.timerColor = 0
+                esfera.x = cx + 150 * math.cos(esfera.angulo)
+                esfera.y = cy + 150 * math.sin(esfera.angulo)
+            else
+                esfera.timerSpawn = esfera.duracionOculta
+            end
+        end
+        if esfera.visible then
+            esfera.angulo = esfera.angulo + esfera.velocidadAngular * dt
+            esfera.x = cx + 150 * math.cos(esfera.angulo)
+            esfera.y = cy + 150 * math.sin(esfera.angulo)
+            esfera.timerColor = esfera.timerColor - dt
+            if esfera.timerColor <= 0 then
+                esfera.color = {math.random(), math.random(), math.random()}
+                esfera.timerColor = 0.5
+            end
         end
     end
 
@@ -61,7 +83,7 @@ function GameState:update(dt)
             estadoJuego = "esperando"
         else
             -- Colision con esfera giratoria
-            if esfera.activa then
+            if esfera.visible then
                 local dx = B.x - esfera.x
                 local dy = B.y - esfera.y
                 local d = math.sqrt(dx * dx + dy * dy)
@@ -126,7 +148,8 @@ end
 
 -- SALIR DEL ESTADO
 function GameState:exit()
-    esfera.activa = false
+    esfera.ultraOn = false
+    esfera.visible = false
 end
 
 -- CLICK DEL MOUSE
@@ -141,19 +164,23 @@ end
 
 -- TOGGLE MODO ULTRA
 function GameState:toggleUltra()
-    esfera.activa = not esfera.activa
-    if esfera.activa then
+    esfera.ultraOn = not esfera.ultraOn
+    if esfera.ultraOn then
+        esfera.timerSpawn = esfera.duracionVisible
+        esfera.visible = true
+        esfera.color = {math.random(), math.random(), math.random()}
         esfera.angulo = 0
         esfera.timerColor = 0
-        esfera.color = {math.random(), math.random(), math.random()}
         esfera.x = cx + 150 * math.cos(esfera.angulo)
         esfera.y = cy + 150 * math.sin(esfera.angulo)
+    else
+        esfera.visible = false
     end
 end
 
 -- VERIFICAR SI ULTRA ESTA ACTIVO
 function GameState:ultraActivo()
-    return esfera.activa
+    return esfera.ultraOn
 end
 
 -- DIBUJAR
@@ -162,7 +189,7 @@ function GameState:draw()
     B.dibujar()
 
     -- Dibujar esfera giratoria
-    if esfera.activa then
+    if esfera.visible then
         love.graphics.setColor(esfera.color)
         love.graphics.circle("fill", esfera.x, esfera.y, esfera.radio)
     end
