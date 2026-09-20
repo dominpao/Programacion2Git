@@ -29,10 +29,11 @@ end
 -- CLICK DEL MOUSE
 function MenuState:mousepressed(x, y, button)
     if button == 1 then
-        if UI.clickEnBoton(x, y, 100, 350, 250, 60) then
+        local w = love.graphics.getWidth()
+        if UI.clickEnBoton(x, y, w/2 - 280, 350, 250, 60) then
             modo = "libre"
             machine:changeState("game")
-        elseif UI.clickEnBoton(x, y, 450, 350, 250, 60) then
+        elseif UI.clickEnBoton(x, y, w/2 + 30, 350, 250, 60) then
             modo = "melodia"
             M.reiniciar()
             machine:changeState("game")

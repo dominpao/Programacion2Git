@@ -12,16 +12,16 @@ function P.dibujarMenu()
     love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 250, 0, 1.2, 1.2)
 
     love.graphics.setColor(0, 1, 0)
-    love.graphics.rectangle("fill", 100, 350, 250, 60, 10, 10)
+    love.graphics.rectangle("fill", w/2 - 280, 350, 250, 60, 10, 10)
     love.graphics.setColor(0, 0, 0)
     local tLibre = "JUGA LIBRE"
-    love.graphics.print(tLibre, 100 + (250 - font:getWidth(tLibre) * 1.5) / 2, 368, 0, 1.5, 1.5)
+    love.graphics.print(tLibre, w/2 - 280 + (250 - font:getWidth(tLibre) * 1.5) / 2, 368, 0, 1.5, 1.5)
 
     love.graphics.setColor(0, 0, 1)
-    love.graphics.rectangle("fill", 450, 350, 250, 60, 10, 10)
+    love.graphics.rectangle("fill", w/2 + 30, 350, 250, 60, 10, 10)
     love.graphics.setColor(1, 1, 1)
     local tMelodia = "TOCA LA MELODIA"
-    love.graphics.print(tMelodia, 450 + (250 - font:getWidth(tMelodia) * 1.5) / 2, 368, 0, 1.5, 1.5)
+    love.graphics.print(tMelodia, w/2 + 30 + (250 - font:getWidth(tMelodia) * 1.5) / 2, 368, 0, 1.5, 1.5)
 end
 
 -- GANASTE
