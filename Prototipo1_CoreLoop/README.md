@@ -23,5 +23,27 @@
 * El juego no tiene condición de game over por derrota porque es un espacio musical experimental. El jugador puede seguir intentando indefinidamente. 
 * Sin embargo, existe derrota parcial: fallar una nota reinicia la secuencia, sin expulsar al jugador del juego.
 
-## 
+---
+
+# Prototipo 2: Maquinas de Estado
+
+## Objetivos
+
+* Implementar maquinas de estado con clases formales
+* Programar instanciado dinámico (spawner con timer)
+
+## Tareas
+
+* Programar estados (enter/update/exit)
+* Gestionar el cambio de estados en tiempo de juego
+* Gestionar versiones del proyecto mediante repositorios
+* Spawner con timer para generación dinámica de la esfera giratoria
+
+## Detalles de implementación
+
+* **Maquina de estados**: Clase base State con métodos enter/update/exit, StateMachine para gestionar transiciones
+* **Estados de aplicación**: Menu, Game, Win
+* **Modo ultra**: Tecla U activa/desactiva esfera giratoria durante el juego
+* **Spawner**: La esfera aparece (4s) y desaparece (1s) cíclicamente con posición aleatoria
+* **6 niveles de melodía**: Escala de sol, arrorró, himno a la alegría + 3 melodías nuevas
 
