@@ -14,9 +14,9 @@ local WinState = require("winstate")
 -- CARGA
 function love.load()
     love.window.setTitle("Peque Symphonie")
-    love.window.setMode(960, 680)
+    love.window.setMode(1280, 680)
 
-    cx = 480
+    cx = 640
     cy = 340
 
     H.crear(cx, cy, 200)
