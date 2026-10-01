@@ -1,5 +1,6 @@
 -- MODULO: HEPTAGONO
 local H = {}
+local I = require("idioma")
 
 -- CREACION
 function H.crear(cx, cy, radio)
@@ -8,7 +9,7 @@ function H.crear(cx, cy, radio)
     H.radio = radio
 
     -- Notas musicales y colores de cada lado
-    H.notas = {"Do", "Re", "Mi", "Fa", "Sol", "La", "Si"}
+    H.notas = I.notas.es
     H.colores = {
         {1,0,0}, {1,0.5,0}, {1,1,0}, {0,1,0},
         {0,0,1}, {0,1,1}, {0.5,0,1}
@@ -42,7 +43,7 @@ function H.getColor(indice)
 end
 
 function H.getNota(indice)
-    return H.notas[indice]
+    return I.getNota(indice, idioma)
 end
 
 return H

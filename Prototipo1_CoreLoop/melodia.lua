@@ -1,19 +1,22 @@
 -- MODULO: MELODIA
 local M = {}
+local I = require("idioma")
+local H = require("heptagono")
 
 -- CREACION
 function M.crear()
+    -- Secuencias con indices de notas (1=Do, 2=Re, 3=Mi, 4=Fa, 5=Sol, 6=La, 7=Si)
     M.secuencias = {
-        {"Do","Re","Mi","Fa","Sol","La","Si","Si","La","Sol","Fa","Mi","Re","Do"},
-        {"Do","Do","Do","Re","Mi","Do","Sol","Sol","Sol","La","Sol","Sol","La","Sol","Fa","Mi","Do","Re","Fa","Mi","Re","Do"},
-        {"Sol","La","Sol","Fa","Mi","Fa","Sol","Re","Mi","Fa","Mi","Fa","Sol","Sol","La","Sol","Fa","Mi","Fa","Sol","Re","Sol","Mi","Do"},
-        {"Mi","Re","Do","Re","Mi","Mi","Mi","Re","Re","Re","Mi","Sol","Sol","Mi","Re","Do","Re","Mi","Mi","Mi","Re","Re","Mi","Re","Do"},
-        {"Mi","Mi","Fa","Sol","Sol","Fa","Mi","Re","Do","Do","Re","Mi","Mi","Re","Re","Mi","Mi","Fa","Sol","Sol","Fa","Mi","Re","Do","Do","Re","Mi","Re","Do","Do"},
-        {"Do","Mi","Fa","Sol","Do","Mi","Fa","Sol","Do","Mi","Fa","Sol","Mi","Do","Mi","Re","Mi","Mi","Re","Do","Mi","Mi","Sol","Sol","Fa","Fa","Mi","Fa","Sol","Mi","Do","Re","Do"},
-        {"Do","Re","Mi","Do","Do","Re","Mi","Do","Mi","Fa","Sol","Mi","Fa","Sol","Sol","La","Sol","Fa","Mi","Do","Sol","La","Sol","Fa","Mi","Do","Sol","La","Sol","Fa","Mi","Do","Do","Sol","Do","Do","Sol","Do"},
-        {"Do","Do","Sol","Sol","La","La","Sol","Fa","Fa","Mi","Mi","Re","Re","Do","Sol","Sol","Fa","Fa","Mi","Mi","Re","Sol","Sol","Fa","Fa","Mi","Mi","Re","Do","Do","Sol","Sol","La","La","Sol","Fa","Fa","Mi","Mi","Re","Re","Do"},
-        {"Mi","Mi","Mi","Mi","Mi","Mi","Mi","Sol","Do","Re","Mi","Fa","Fa","Fa","Fa","Fa","Mi","Mi","Mi","Mi","Mi","Re","Re","Mi","Re","Sol","Mi","Mi","Mi","Mi","Mi","Mi","Mi","Sol","Do","Re","Mi","Fa","Fa","Fa","Fa","Fa","Mi","Mi","Mi","Mi","Sol","Sol","Fa","Re","Do"},
-        {"Do","Re","Mi","Sol","Sol","La","Sol","Mi","Do","Re","Mi","Mi","Re","Do","Re","Do","Re","Mi","Sol","Sol","La","Sol","Mi","Do","Re","Mi","Mi","Re","Re","Do","Fa","Fa","La","La","La","Sol","Sol","Mi","Do","Re","Do","Re","Mi","Sol","Sol","La","Sol","Mi","Do","Re","Mi","Mi","Re","Re","Do"}
+        {1,2,3,4,5,6,7,7,6,5,4,3,2,1},
+        {1,1,1,2,3,1,5,5,5,6,5,5,6,5,4,3,1,2,4,3,2,1},
+        {5,6,5,4,3,4,5,2,3,4,3,4,5,5,6,5,4,3,4,5,2,5,3,1},
+        {3,2,1,2,3,3,3,2,2,2,3,5,5,3,2,1,2,3,3,3,2,2,3,2,1},
+        {3,3,4,5,5,4,3,2,1,1,2,3,3,2,2,3,3,4,5,5,4,3,2,1,1,2,3,2,1,1},
+        {1,3,4,5,1,3,4,5,1,3,4,5,3,1,3,2,3,3,2,1,3,3,5,5,4,4,3,4,5,3,1,2,1},
+        {1,2,3,1,1,2,3,1,3,4,5,3,4,5,5,6,5,4,3,1,5,6,5,4,3,1,5,6,5,4,3,1,1,5,1,1,5,1},
+        {1,1,5,5,6,6,5,4,4,3,3,2,2,1,5,5,4,4,3,3,2,5,5,4,4,3,3,2,1,1,5,5,6,6,5,4,4,3,3,2,2,1},
+        {3,3,3,3,3,3,3,5,1,2,3,4,4,4,4,4,3,3,3,3,3,2,2,3,2,5,3,3,3,3,3,3,3,5,1,2,3,4,4,4,4,4,3,3,3,3,5,5,4,2,1},
+        {1,2,3,5,5,6,5,3,1,2,3,3,2,1,2,1,2,3,5,5,6,5,3,1,2,3,3,2,2,1,4,4,6,6,6,5,5,3,1,2,1,2,3,5,5,6,5,3,1,2,3,3,2,2,1}
     }
     M.nivelActual = 1
     M.notaEnCurso = 1
@@ -22,7 +25,8 @@ end
 -- VERIFICACION
 function M.verificar(notaTocada)
     local secuencia = M.secuencias[M.nivelActual]
-    if notaTocada == secuencia[M.notaEnCurso] then
+    local notaEsperada = H.getNota(secuencia[M.notaEnCurso])
+    if notaTocada == notaEsperada then
         M.notaEnCurso = M.notaEnCurso + 1
         if M.notaEnCurso > #secuencia then
             if M.nivelActual < 10 then
@@ -62,6 +66,7 @@ function M.dibujar()
     for i = 1, #secuencia do
         local nx = 20 + (i - 1) * 22
         local ny = 615
+        local nombreNota = I.getNota(secuencia[i], idioma)
         if i < M.notaEnCurso then
             love.graphics.setColor(0.5, 0.5, 0.5)
         elseif i == M.notaEnCurso then
@@ -69,7 +74,7 @@ function M.dibujar()
         else
             love.graphics.setColor(1, 1, 1)
         end
-        love.graphics.print(string.sub(secuencia[i], 1, 2), nx, ny)
+        love.graphics.print(string.sub(nombreNota, 1, 2), nx, ny)
     end
 end
 

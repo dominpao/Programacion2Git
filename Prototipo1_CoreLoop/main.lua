@@ -26,6 +26,7 @@ function love.load()
 
     -- Variables globales del juego
     modo = ""
+    idioma = "es"
     mx = cx
     my = cy
     notaActual = ""
