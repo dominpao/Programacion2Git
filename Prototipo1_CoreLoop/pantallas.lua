@@ -1,26 +1,28 @@
 -- MODULO: PANTALLAS
 local P = {}
+local I = require("idioma")
 
 -- MENU
 function P.dibujarMenu()
     love.graphics.setColor(1, 1, 1)
     local w = love.graphics.getWidth()
     local font = love.graphics.getFont()
-    local t1 = "Peque Symphonie"
-    local t2 = "ESC: Salir | M: Menu | U: Ultra"
+
+    local t1 = I.getTexto("titulo", idioma)
+    local t2 = I.getTexto("controles", idioma)
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 200, 0, 2, 2)
     love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 250, 0, 1.2, 1.2)
 
     love.graphics.setColor(0, 1, 0)
     love.graphics.rectangle("fill", w/2 - 280, 350, 250, 60, 10, 10)
     love.graphics.setColor(0, 0, 0)
-    local tLibre = "JUGA LIBRE"
+    local tLibre = I.getTexto("botonLibre", idioma)
     love.graphics.print(tLibre, w/2 - 280 + (250 - font:getWidth(tLibre) * 1.5) / 2, 368, 0, 1.5, 1.5)
 
     love.graphics.setColor(0, 0, 1)
     love.graphics.rectangle("fill", w/2 + 30, 350, 250, 60, 10, 10)
     love.graphics.setColor(1, 1, 1)
-    local tMelodia = "TOCA LA MELODIA"
+    local tMelodia = I.getTexto("botonMelodia", idioma)
     love.graphics.print(tMelodia, w/2 + 30 + (250 - font:getWidth(tMelodia) * 1.5) / 2, 368, 0, 1.5, 1.5)
 end
 
@@ -29,9 +31,11 @@ function P.dibujarGanaste()
     love.graphics.setColor(1, 1, 0)
     local w = love.graphics.getWidth()
     local font = love.graphics.getFont()
-    love.graphics.print("GANASTE!", (w - font:getWidth("GANASTE!") * 3) / 2, 250, 0, 3, 3)
+    local msg = I.getTexto("mensajeGanaste", idioma)
+    love.graphics.print(msg, (w - font:getWidth(msg) * 3) / 2, 250, 0, 3, 3)
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print("Hacé click para volver al menú", (w - font:getWidth("Hacé click para volver al menú")) / 2, 350)
+    local clickMsg = I.getTexto("clickVolver", idioma)
+    love.graphics.print(clickMsg, (w - font:getWidth(clickMsg)) / 2, 350)
 end
 
 -- TEXTOS EN JUEGO
@@ -39,8 +43,8 @@ function P.dibujarTextos()
     love.graphics.setColor(1, 1, 1)
     local w = love.graphics.getWidth()
     local font = love.graphics.getFont()
-    local t1 = "Peque Symphonie"
-    local t2 = "ESC: Salir | M: Menu | U: Ultra"
+    local t1 = I.getTexto("titulo", idioma)
+    local t2 = I.getTexto("controles", idioma)
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 30, 0, 2, 2)
     love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 70, 0, 1.2, 1.2)
 end
@@ -56,7 +60,8 @@ end
 function P.dibujarNota(notaActual, notaColor)
     if notaActual ~= "" then
         love.graphics.setColor(notaColor)
-        love.graphics.print("Nota: " .. notaActual, 20, 500)
+        local prefijo = I.getTexto("nota", idioma)
+        love.graphics.print(prefijo .. notaActual, 20, 500)
     end
 end
 

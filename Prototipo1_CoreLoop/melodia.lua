@@ -60,7 +60,7 @@ function M.dibujar()
     local secuencia = M.secuencias[M.nivelActual]
 
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print("Nivel " .. M.nivelActual, 20, 590)
+    love.graphics.print(I.getTexto("nivel", idioma) .. M.nivelActual, 20, 590)
     love.graphics.print(M.notaEnCurso - 1 .. "/" .. #secuencia, 1180, 590)
 
     for i = 1, #secuencia do

@@ -9,6 +9,7 @@ local B = require("pelota")
 local M = require("melodia")
 local S = require("sonidos")
 local UI = require("pantallas")
+local I = require("idioma")
 
 local machine = nil
 
@@ -95,11 +96,11 @@ function GameState:update(dt)
                     local dot = B.vx * nx + B.vy * ny
                     B.vx = B.vx - 2 * dot * nx
                     B.vy = B.vy - 2 * dot * ny
-                    if modo == "melodia" then
-                        M.reiniciarSecuencia()
-                        mensajeNivel = "Secuencia reiniciada!"
-                        timerMensaje = 2
-                    end
+if modo == "melodia" then
+                            M.reiniciarSecuencia()
+                            mensajeNivel = I.getTexto("secuenciaReiniciada", idioma)
+                            timerMensaje = 2
+                        end
                     return
                 end
             end
@@ -114,10 +115,10 @@ function GameState:update(dt)
                     if resultado == "ganaste" then
                         machine:changeState("win")
                     elseif resultado == "avanza" then
-                        mensajeNivel = "Nivel " .. M.nivelActual - 1 .. " completado!"
+                        mensajeNivel = I.getTexto("nivelCompletado", idioma, M.nivelActual - 1)
                         timerMensaje = 2
                     elseif resultado == "fallo" then
-                        mensajeNivel = "Secuencia reiniciada!"
+                        mensajeNivel = I.getTexto("secuenciaReiniciada", idioma)
                         timerMensaje = 2
                     end
                 end
