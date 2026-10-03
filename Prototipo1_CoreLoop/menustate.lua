@@ -37,6 +37,19 @@ function MenuState:mousepressed(x, y, button)
             modo = "melodia"
             M.reiniciar()
             machine:changeState("game")
+        else
+            -- Click en selector de idioma (area del texto en controles)
+            local font = love.graphics.getFont()
+            local t2 = (idioma == "es") and "ESC: Salir | M: Menu | U: Ultra" or "ESC: Exit | M: Menu | U: Ultra"
+            local langText = (idioma == "es") and "[ES] English" or "Español [EN]"
+            local fullControls = t2 .. "  |  " .. langText
+            local controlsWidth = font:getWidth(fullControls) * 1.2
+            local langTextWidth = font:getWidth(langText) * 1.2
+            local langX = (w - controlsWidth) / 2 + controlsWidth - langTextWidth
+            local langY = 250
+            if x >= langX and x <= langX + langTextWidth and y >= langY and y <= langY + font:getHeight() * 1.2 then
+                idioma = (idioma == "es") and "en" or "es"
+            end
         end
     end
 end

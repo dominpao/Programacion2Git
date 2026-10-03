@@ -11,7 +11,19 @@ function P.dibujarMenu()
     local t1 = I.getTexto("titulo", idioma)
     local t2 = I.getTexto("controles", idioma)
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 200, 0, 2, 2)
-    love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 250, 0, 1.2, 1.2)
+
+    -- Controles + selector idioma
+    local langText = (idioma == "es") and "[ES] English" or "Español [EN]"
+    local fullControls = t2 .. "  |  " .. langText
+    local controlsX = (w - font:getWidth(fullControls) * 1.2) / 2
+    local controlsY = 250
+    love.graphics.print(fullControls, controlsX, controlsY, 0, 1.2, 1.2)
+
+    -- Subrayado en parte clickeable
+    local clickableX = controlsX + font:getWidth(t2 .. "  |  ") * 1.2
+    local clickableW = font:getWidth(langText) * 1.2
+    love.graphics.setLineWidth(1)
+    love.graphics.line(clickableX, controlsY + font:getHeight() * 1.2 + 2, clickableX + clickableW, controlsY + font:getHeight() * 1.2 + 2)
 
     love.graphics.setColor(0, 1, 0)
     love.graphics.rectangle("fill", w/2 - 280, 350, 250, 60, 10, 10)
@@ -45,8 +57,20 @@ function P.dibujarTextos()
     local font = love.graphics.getFont()
     local t1 = I.getTexto("titulo", idioma)
     local t2 = I.getTexto("controles", idioma)
+
+    -- Controles + selector idioma
+    local langText = (idioma == "es") and "[ES] English" or "Español [EN]"
+    local fullControls = t2 .. "  |  " .. langText
+    local controlsX = (w - font:getWidth(fullControls) * 1.2) / 2
+    local controlsY = 70
     love.graphics.print(t1, (w - font:getWidth(t1) * 2) / 2, 30, 0, 2, 2)
-    love.graphics.print(t2, (w - font:getWidth(t2) * 1.2) / 2, 70, 0, 1.2, 1.2)
+    love.graphics.print(fullControls, controlsX, controlsY, 0, 1.2, 1.2)
+
+    -- Subrayado en parte clickeable
+    local clickableX = controlsX + font:getWidth(t2 .. "  |  ") * 1.2
+    local clickableW = font:getWidth(langText) * 1.2
+    love.graphics.setLineWidth(1)
+    love.graphics.line(clickableX, controlsY + font:getHeight() * 1.2 + 2, clickableX + clickableW, controlsY + font:getHeight() * 1.2 + 2)
 end
 
 -- LINEA DE DIRECCION

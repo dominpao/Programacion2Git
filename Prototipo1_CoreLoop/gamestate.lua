@@ -107,7 +107,7 @@ if modo == "melodia" then
 
             local impacto = B.colisionar(H.verts, H.colores, H.notas, S.sounds)
             if impacto then
-                notaActual = H.notas[impacto]
+                notaActual = H.getNota(impacto)
                 notaColor = H.colores[impacto]
                 estadoJuego = "volviendo"
                 if modo == "melodia" then
