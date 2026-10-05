@@ -49,6 +49,7 @@ end
 -- ACTUALIZACION
 function love.update(dt)
     sm:update(dt)
+    S.update(dt)
 end
 
 -- ENTRADA

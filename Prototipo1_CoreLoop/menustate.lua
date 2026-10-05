@@ -6,6 +6,7 @@ local MenuState = State:new("menu")
 
 local UI = require("pantallas")
 local M = require("melodia")
+local Eventos = require("eventos")
 
 -- REFERENCIA A LA MAQUINA DE ESTADOS
 local machine = nil
@@ -49,6 +50,7 @@ function MenuState:mousepressed(x, y, button)
             local langY = 250
             if x >= langX and x <= langX + langTextWidth and y >= langY and y <= langY + font:getHeight() * 1.2 then
                 idioma = (idioma == "es") and "en" or "es"
+                Eventos:emit("idioma_cambiado")
             end
         end
     end
