@@ -10,6 +10,7 @@ local M = require("melodia")
 local S = require("sonidos")
 local UI = require("pantallas")
 local I = require("idioma")
+local Eventos = require("eventos")
 
 local machine = nil
 
@@ -157,7 +158,7 @@ end
 function GameState:mousepressed(x, y, button)
     if button == 1 then
         if estadoJuego == "esperando" or estadoJuego == "melodia" then
-            B.lanzar(x, y, cx, cy, 1500)
+            B.lanzar(x, y, cx, cy, 1800)
             estadoJuego = "lanzada"
         end
     end

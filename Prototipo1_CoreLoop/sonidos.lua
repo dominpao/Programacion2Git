@@ -44,4 +44,9 @@ Eventos:listen("idioma_cambiado", S, function(obj)
     obj.reproducirEscala()
 end)
 
+-- Escuchar evento de nota revelada
+Eventos:listen("nota_revelada", S, function(obj, indice)
+    -- Solo animacion visual, el sonido ya se reprodujo en la colision
+end)
+
 return S

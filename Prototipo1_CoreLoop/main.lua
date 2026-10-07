@@ -6,6 +6,7 @@ local H = require("heptagono")
 local B = require("pelota")
 local M = require("melodia")
 local S = require("sonidos")
+local P = require("pantallas")
 local StateMachine = require("statemachine")
 local MenuState = require("menustate")
 local GameState = require("gamestate")
@@ -14,9 +15,9 @@ local WinState = require("winstate")
 -- CARGA
 function love.load()
     love.window.setTitle("Peque Symphonie")
-    love.window.setMode(1280, 680)
+    love.window.setMode(1500, 680)
 
-    cx = 640
+    cx = 750
     cy = 340
 
     H.crear(cx, cy, 200)
@@ -50,6 +51,7 @@ end
 function love.update(dt)
     sm:update(dt)
     S.update(dt)
+    P.update(dt)
 end
 
 -- ENTRADA
@@ -83,4 +85,5 @@ function love.draw()
     if sm.currentState then
         sm.currentState:draw()
     end
+    P.dibujarRevelacion()
 end
