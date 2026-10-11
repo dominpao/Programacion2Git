@@ -47,3 +47,35 @@
 * **Spawner**: La esfera aparece (4s) y desaparece (1s) cíclicamente con posición aleatoria
 * **6 niveles de melodía**: Escala de sol, arrorró, himno a la alegría + 3 melodías nuevas
 
+---
+
+# Prototipo 3: Eventos personalizados + Interfaz de juego
+
+## Objetivos
+
+* Implementar eventos personalizados (EventBus)
+* Programar interfaz de juego completa
+
+## Tareas
+
+* Crear una interfaz de juego completa (Menu/Game/Win)
+* Codificar el funcionamiento y actualización de la interfaz de usuario con eventos
+* Codificar respuestas visuales y de audio en respuesta a eventos
+* Comunicar objetos entre sí mediante eventos
+* Gestionar versiones del proyecto mediante repositorio
+
+## Detalles de implementación
+
+* **EventBus**: Sistema de eventos desacoplado (listen/emit/unlistenAll)
+* **Eventos implementados**: `idioma_cambiado` (reproduce escala audio), `nota_revelada` (animación flash visual)
+* **Interfaz de juego**: Menu, Game, Win con botones, textos, selector de idioma inline
+* **UI con eventos**: Selector de idioma inline en menú y juego, textos traducidos en tiempo real
+* **Respuestas a eventos**: Audio (escala al cambiar idioma), Visual (flash al revelar nota oculta)
+* **Comunicación por eventos**: EventBus conecta sonidos, pantallas, melodía, gamestate, menustate
+* **Mecánica oculta**: 10 niveles con notas ocultas (`?`), revelación al acertar con sonido + flash
+* **i18n ES/EN**: Notas (Do=C, Re=D, Mi=E, Fa=F, Sol=G, La=A, Si=B), UI completa, controles, mensajes
+* **Selector de idioma**: Inline en menú y juego (click en texto subrayado)
+* **10 niveles de melodía** con longitudes exactas y notas ocultas parseadas del spec
+* **Pantalla 1500x680**, velocidad de lanzamiento 1800
+* **Modo ultra**: Esfera giratoria con spawner timer (aparece 4s, desaparece 1s, posición aleatoria)
+
